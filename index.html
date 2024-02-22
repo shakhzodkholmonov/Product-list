@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My To-Do List</title>
+    <link href="https://fonts.cdnfonts.com/css/minimal" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Shopping List</h1>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Enter item...">
+        </form>
+        <button class="addTodo" type="button" onclick="addTodo()">+Add item</button>
+        <h1>Filter items</h1>
+        <hr>
+        <ul id="todo-list">
+            <!-- To-dos will be added here dynamically -->
+        </ul>
+        <button class="clearbutton" type="button" onclick="clearAll()">Clear All</button>
+    </div>
+
+    <script>
+        function addTodo() {
+            const todoInput = document.getElementById('todo-input').value;
+            if (todoInput.trim() !== '') {
+                const todoList = document.getElementById('todo-list');
+                const newTodo = document.createElement('li');
+                newTodo.classList.add('todo')
+                newTodo.textContent = todoInput;
+
+                const removeButton = document.createElement('button');
+                removeButton.classList.add('remove')
+                removeButton.textContent = 'X';
+                removeButton.addEventListener('click', function () {
+                    todoList.removeChild(newTodo);
+                });
+
+                newTodo.appendChild(removeButton);
+                todoList.appendChild(newTodo);
+
+                document.getElementById('todo-input').value = ''; // Clear input after adding
+            }
+        }
+
+        function clearAll() {
+            const todoList = document.getElementById('todo-list');
+            todoList.innerHTML = ''; // Remove all tasks
+        }
+    </script>
+</body>
+
+</html>
